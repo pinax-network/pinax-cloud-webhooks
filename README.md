@@ -1,6 +1,6 @@
-# [Pinax Cloud](https://pinax.network/) ☁️ Webhooks
+# `Pinax Cloud` ☁️ Webhooks
 
-Add **webhooks** to your **Pinax Cloud** project.
+Add **webhooks** to your [**Pinax Cloud**](https://pinax.network/) project.
 
 ## Getting Started
 
