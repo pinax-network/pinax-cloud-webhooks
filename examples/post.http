@@ -1,0 +1,6 @@
+POST http://localhost:8080 HTTP/1.1
+content-type: application/json
+x-signature-secp256k1: SIG_K1_KiqgYFjSfGtJBX51PRfMN81VbTfVznUZZVnxqhPya88uSkc597XA1oh41vppo2GBoc3S2CERRKoqXUfUo7D5RSqVnCHLZp
+x-signature-timestamp: 1685641824
+
+{"block_num":248343302,"timestamp":"2023-06-01T17:50:24.000Z","cursor":"KC80RueUeEb-vFhATgzluqWwLpc_DFhrXQjhKRJBh4H2pSGR28-mBmYgO0mDlvv03hK9S1L43YmeEXYt88dR6te4wOsxuSltEiovl43t_bLqfaXyPQkZcr1lXOyGZI7aUT7Tagn_ebIA4t_nb6CNYRAyZMBzfzLgiW1UoYICcKtFuiVmxjSrcsjThv3E8tEUq-pwELWikS-gATN4KRlaOc-AZPSYvDooYyNs","data":{"items":[{"trxId":"5d634c6b38d21ed1fc8ed16c203c51f3b6b700fb68d6f4e576075ca90d5be645","actionOrdinal":2,"contract":"alien.worlds","action":"transfer","symcode":"TLM","from":"m.federation","to":"3tqm2.c.wam","quantity":"0.9047 TLM","memo":"ALIEN WORLDS - Mined Trilium","amount":"9047","precision":4,"value":0.9047}]}}

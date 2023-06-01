@@ -13,7 +13,7 @@ To get started using this service, please follow these steps:
 
 ## [`webhooks.yaml`](webhooks.yml)
 ```yaml
-- url: http://localhost:8000
+- url: http://localhost:8080
   chain: wax
   substreams: eosio.token
   module: map_transfers
@@ -45,36 +45,35 @@ The POST message will be a JSON object with the following structure:
 
 **headers**
 
-```json
-{
-  "content-type": "application/json",
-  "x-signature-secp256k1": "SIG_K1_Kg7FcN3ZnCUs1ZRH129Ps6yiDSQgkTQhbCAugH7AGKkpQaumLXw5yZ4S7vahcqWt44RBgHrCCmSWfKCih8AZ99aMU68PDs",
-  "x-signature-timestamp": 1685624506
-}
+```http
+POST http://localhost:8080 HTTP/1.1
+content-type: application/json
+x-signature-secp256k1: SIG_K1_KiqgYFjSfGtJBX51PRfMN81VbTfVznUZZVnxqhPya88uSkc597XA1oh41vppo2GBoc3S2CERRKoqXUfUo7D5RSqVnCHLZp
+x-signature-timestamp: 1685641824
 ```
 
 **body**
 
 ```json
 {
-  "block_num": 248308667,
-  "timestamp": "2023-06-01T13:01:46.500Z",
-  "cursor": "74OpvM2u8WQlJLYDp3f4TaWwLpcyBF5nVgvtLBdGj4ujoyGQ3s_0B2gnaBmFw__wj0S_T12tit_PRX9588FTuNPrxusyvyc7R30vkd29qLDuLPr7MQ9NJb0xDuOJaovRWTjfYQrzebID6tWyaaCMZURmYsAjfmG1hj1ZpoxTcKQQ7HVmwW_6dJrU0_uWpIATrep0RbLwlSmrB2EvKkxfa8XWZfTOtjslMXU=",
+  "block_num": 248343302,
+  "timestamp": "2023-06-01T17:50:24.000Z",
+  "cursor": "KC80RueUeEb-vFhATgzluqWwLpc_DFhrXQjhKRJBh4H2pSGR28-mBmYgO0mDlvv03hK9S1L43YmeEXYt88dR6te4wOsxuSltEiovl43t_bLqfaXyPQkZcr1lXOyGZI7aUT7Tagn_ebIA4t_nb6CNYRAyZMBzfzLgiW1UoYICcKtFuiVmxjSrcsjThv3E8tEUq-pwELWikS-gATN4KRlaOc-AZPSYvDooYyNs",
   "data": {
     "items": [
       {
-        "trxId": "9d923d7eb12b872cc5e456b8ee3371cc34497499aa5cd3fd48ca375ea048683a",
+        "trxId": "5d634c6b38d21ed1fc8ed16c203c51f3b6b700fb68d6f4e576075ca90d5be645",
         "actionOrdinal": 2,
         "contract": "alien.worlds",
         "action": "transfer",
         "symcode": "TLM",
         "from": "m.federation",
-        "to": "1im2a.c.wam",
-        "quantity": "4.0216 TLM",
+        "to": "3tqm2.c.wam",
+        "quantity": "0.9047 TLM",
         "memo": "ALIEN WORLDS - Mined Trilium",
-        "amount": "40216",
+        "amount": "9047",
         "precision": 4,
-        "value": 4.0216
+        "value": 0.9047
       }
     ]
   }
@@ -89,13 +88,13 @@ import { Bytes, PublicKey, Signature } from "@wharfkit/session";
 // ...HTTP server
 
 // get headers and body from POST request
-const body = request.rawBody;
-const timestamp = request.headers["x-signature-timestamp"];
-const signature = request.headers["x-signature-secp256k1"];
+const rawBody = await request.text();
+const timestamp = request.headers.get("x-signature-timestamp");
+const signature = request.headers.get("x-signature-secp256k1");
 
 // validate signature using public key
 const publicKey = PublicKey.from("PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B");
-const hex = Buffer.from(timestamp + body).toString("hex");
+const hex = Buffer.from(timestamp + rawBody).toString("hex");
 const isVerified = Signature.from(signature).verifyMessage(Bytes.from(hex), publicKey);
 // => true/false
 ```
