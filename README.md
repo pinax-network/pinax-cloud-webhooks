@@ -13,7 +13,7 @@ To get started using this service, please follow these steps:
 
 ## [`webhooks.yaml`](webhooks.yml)
 ```yaml
-- url: http://localhost:8080
+- url: http://localhost:3000
   chain: wax
   substreams: eosio.token
   module: map_transfers
@@ -46,9 +46,9 @@ The POST message will be a JSON object with the following structure:
 **headers**
 
 ```http
-POST http://localhost:8080 HTTP/1.1
+POST http://localhost:3000 HTTP/1.1
 content-type: application/json
-x-signature-secp256k1: SIG_K1_KiqgYFjSfGtJBX51PRfMN81VbTfVznUZZVnxqhPya88uSkc597XA1oh41vppo2GBoc3S2CERRKoqXUfUo7D5RSqVnCHLZp
+x-signature-secp256k1: SIG_K1_K2ZCfPn1moGqykfCeDGZMBf9HouYhk4GPu8VZcZuzMmmJzhmvEUqUUaMFWxuikzNE7Xf3LmZnHoBmyCRqUSu67X6CW4khm
 x-signature-timestamp: 1685641824
 ```
 
@@ -56,6 +56,10 @@ x-signature-timestamp: 1685641824
 
 ```json
 {
+  "id": "-rHS8TH8oI_JLIhwC2HK2",
+  "chain": "wax",
+  "moduleName": "map_transfers",
+  "moduleHash": "14af0133e41609c04405da93daeab01806068241",
   "block_num": 248343302,
   "timestamp": "2023-06-01T17:50:24.000Z",
   "cursor": "KC80RueUeEb-vFhATgzluqWwLpc_DFhrXQjhKRJBh4H2pSGR28-mBmYgO0mDlvv03hK9S1L43YmeEXYt88dR6te4wOsxuSltEiovl43t_bLqfaXyPQkZcr1lXOyGZI7aUT7Tagn_ebIA4t_nb6CNYRAyZMBzfzLgiW1UoYICcKtFuiVmxjSrcsjThv3E8tEUq-pwELWikS-gATN4KRlaOc-AZPSYvDooYyNs",

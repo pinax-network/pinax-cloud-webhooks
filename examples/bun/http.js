@@ -1,7 +1,7 @@
 import { Bytes, PublicKey, Signature } from "@wharfkit/session";
 
 export default {
-  port: 8080,
+  port: 3000,
   development: true,
   async fetch(request) {
     // get headers and body from POST request
@@ -20,6 +20,7 @@ export default {
     if (!isVerified) {
       return new Response("invalid request signature", { status: 401 });
     }
+    console.dir({timestamp, signature});
     console.dir(JSON.stringify(JSON.parse(body), null, 2));
     return new Response("OK");
   },

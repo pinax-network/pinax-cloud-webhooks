@@ -1,4 +1,4 @@
-POST http://localhost:8080 HTTP/1.1
+POST http://localhost:3000 HTTP/1.1
 content-type: application/json
 x-signature-secp256k1: SIG_K1_KiqgYFjSfGtJBX51PRfMN81VbTfVznUZZVnxqhPya88uSkc597XA1oh41vppo2GBoc3S2CERRKoqXUfUo7D5RSqVnCHLZp
 x-signature-timestamp: 1685641824
