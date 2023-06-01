@@ -15,6 +15,7 @@ To get started using this service, please follow these steps:
 - url: http://localhost:8000
   chain: wax
   substreams: eosio.token
+  module: map_transfers
   param: symcode=WAX
 ```
 
