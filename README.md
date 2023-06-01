@@ -19,6 +19,25 @@ To get started using this service, please follow these steps:
   param: symcode=WAX
 ```
 
+| Field         | Description |
+| ------------- | ----------- |
+| `url`         | URL to receive POST requests. |
+| `chain`       | Receive data from blockchain. |
+| `substreams`  | Substreams data source. |
+| `module`      | Substreams module. |
+| `param`       | Any additional filters to apply. |
+
+**Chains available**
+- `wax`
+- `eos`
+- `polygon`
+
+**Substreams/module available**
+- [`eosio.token`](https://github.com/pinax-network/substreams/tree/develop/eosio.token)
+  - `map_transfers`
+  - `map_accounts`
+  - `map_stat`
+
 ## POST Message
 
 The POST message will be a JSON object with the following structure:
