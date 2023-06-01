@@ -1,15 +1,22 @@
 # [Pinax Cloud](https://pinax.network/) ☁️ Webhooks
 
-Add webhooks to your Pinax Cloud project.
+Add **webhooks** to your **Pinax Cloud** project.
 
 ## Getting Started
 
 To get started using this service, please follow these steps:
 
-1. Submit PR with project details to `"webhooks.yaml"` in this repo.
+1. Submit PR with project details to [`webhooks.yaml`](webhooks.yml) in this repo.
 2. Once PR is merged, you will start receiving POST requests to your webhook URL.
 3. If you need to update your webhook URL, submit a PR with the new URL.
 4. If you need to remove your webhook, submit a PR removing your project details.
+
+```yaml
+- url: http://localhost:8000
+  chain: wax
+  substreams: eosio.token
+  param: symcode=WAX
+```
 
 ## POST Message
 
@@ -29,15 +36,10 @@ The POST message will be a JSON object with the following structure:
 
 ```json
 {
-  "id": "W897R4SANcQ8T5v-X00Yn",
-  "block_num": "248308667",
+  "block_num": 248308667,
   "timestamp": "2023-06-01T13:01:46.500Z",
-  "endpoint": "https://wax.firehose.eosnation.io:9001",
-  "moduleHash": "14af0133e41609c04405da93daeab01806068241",
-  "moduleName": "map_transfers",
-  "params": [],
   "cursor": "74OpvM2u8WQlJLYDp3f4TaWwLpcyBF5nVgvtLBdGj4ujoyGQ3s_0B2gnaBmFw__wj0S_T12tit_PRX9588FTuNPrxusyvyc7R30vkd29qLDuLPr7MQ9NJb0xDuOJaovRWTjfYQrzebID6tWyaaCMZURmYsAjfmG1hj1ZpoxTcKQQ7HVmwW_6dJrU0_uWpIATrep0RbLwlSmrB2EvKkxfa8XWZfTOtjslMXU=",
-  "message": {
+  "data": {
     "items": [
       {
         "trxId": "9d923d7eb12b872cc5e456b8ee3371cc34497499aa5cd3fd48ca375ea048683a",
