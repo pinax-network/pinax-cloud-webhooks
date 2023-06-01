@@ -11,6 +11,7 @@ To get started using this service, please follow these steps:
 3. If you need to update your webhook URL, submit a PR with the new URL.
 4. If you need to remove your webhook, submit a PR removing your project details.
 
+## [`webhooks.yaml`](webhooks.yml)
 ```yaml
 - url: http://localhost:8000
   chain: wax
