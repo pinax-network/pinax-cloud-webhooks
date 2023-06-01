@@ -1,0 +1,7 @@
+- manifest: https://github.com/pinax-network/substreams/releases/download/eosio.token-v0.12.1/eosio-token-v0.12.1.spkg
+  module: map_transfers
+  params: map_transfers="symcode=WAX"
+  endpoint: https://wax.firehose.eosnation.io:9001
+  start_block: -1
+  public_key: PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B
+  url: http://localhost:8000
