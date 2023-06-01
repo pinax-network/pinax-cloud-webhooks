@@ -28,12 +28,12 @@ To get started using this service, please follow these steps:
 | `module`      | Substreams module. |
 | `param`       | Any additional filters to apply. |
 
-**Chains available**
+### Chains available
 - `wax`
 - `eos`
 - `polygon`
 
-**Substreams/module available**
+### Substreams/module available
 - [`eosio.token`](https://github.com/pinax-network/substreams/tree/develop/eosio.token)
   - `map_transfers`
   - `map_accounts`
