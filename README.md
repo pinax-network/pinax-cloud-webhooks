@@ -71,6 +71,7 @@ const timestamp = request.headers["x-signature-timestamp"];
 const signature = request.headers["x-signature-secp256k1"];
 
 // validate signature using public key
+const publicKey = PublicKey.from("PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B");
 const hex = Buffer.from(timestamp + body).toString("hex");
 const isVerified = Signature.from(signature).verifyMessage(Bytes.from(hex), publicKey);
 // => true/false
