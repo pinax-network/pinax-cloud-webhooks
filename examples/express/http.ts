@@ -11,7 +11,6 @@ app.use(async (req, res) => {
   const timestamp = req.headers["x-signature-timestamp"];
   const signature = req.headers["x-signature-secp256k1"];
   const body = req.body;
-  console.log(body);
 
   if (!timestamp) return res.send("missing required timestamp in headers").status(400);
   if (!signature) return res.send("missing required signature in headers").status(400);
@@ -19,8 +18,8 @@ app.use(async (req, res) => {
 
   // validate signature using public key
   const publicKey = PublicKey.from("PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B");
-  const hex = Bytes.from(Buffer.from(timestamp + body).toString("hex"));
-  const isVerified = Signature.from(signature).verifyMessage(hex, publicKey);
+  const message = Bytes.from(Buffer.from(timestamp + body).toString("hex"));
+  const isVerified = Signature.from(signature).verifyMessage(message, publicKey);
 
   if (!isVerified) {
       return res.send("invalid request signature").status(401);

@@ -55,36 +55,54 @@ The POST message will be a JSON object with the following structure:
 ```http
 POST http://localhost:3000 HTTP/1.1
 content-type: application/json
-x-signature-secp256k1: SIG_K1_K2ZCfPn1moGqykfCeDGZMBf9HouYhk4GPu8VZcZuzMmmJzhmvEUqUUaMFWxuikzNE7Xf3LmZnHoBmyCRqUSu67X6CW4khm
-x-signature-timestamp: 1685641824
+x-signature-secp256k1: SIG_K1_Ke6QVix3nkobMBmeWkBFq9Dhee1wQEvaCwtDzqmrZ2u4cRjjA7R3kxioxZJVExL2J14RYxpzeFP4mkohUwQsBSmAPKz5mG
+x-signature-timestamp: 1685740240
 ```
 
 **body**
 
 ```json
 {
-  "id": "-rHS8TH8oI_JLIhwC2HK2",
-  "chain": "wax",
-  "moduleName": "map_transfers",
-  "moduleHash": "14af0133e41609c04405da93daeab01806068241",
-  "block_num": 248343302,
-  "timestamp": "2023-06-01T17:50:24.000Z",
-  "cursor": "KC80RueUeEb-vFhATgzluqWwLpc_DFhrXQjhKRJBh4H2pSGR28-mBmYgO0mDlvv03hK9S1L43YmeEXYt88dR6te4wOsxuSltEiovl43t_bLqfaXyPQkZcr1lXOyGZI7aUT7Tagn_ebIA4t_nb6CNYRAyZMBzfzLgiW1UoYICcKtFuiVmxjSrcsjThv3E8tEUq-pwELWikS-gATN4KRlaOc-AZPSYvDooYyNs",
+  "id": "DgHKHEVqKVEYDbPe9YLXY",
+  "cursor": "zabwrIYYom395LNlwBky4aWwLpcyBF5nUA_lKxJDj4ujpHLDj8iiVGJ0bE7Uwvz1iBLoQgyrj4vIEC9z9JRWvoO_kek26CQ_QC4lwYHvrrTvKfb1aFsTJO5qW77bM9DRWTjfZwnyfbgJ6tWybvPfNks1Z5QiKmO7jG1ZooMCePBDv3sxwWmvcMnV1fvE8NRI_-IiEbKpnX-rBWZ-KE9cNJnQZ_PKvTx2ZHY=",
+  "clock": {
+    "timestamp": "2023-06-02T21:10:40.000Z",
+    "number": 248540132,
+    "id": "0ed06be4d314c4be5e739f7ad54a86d62bebab5576e9b81e00a57aa8ee84dea8"
+  },
+  "manifest": {
+    "chain": "wax",
+    "moduleName": "map_transfers",
+    "moduleHash": "14af0133e41609c04405da93daeab01806068241"
+  },
   "data": {
     "items": [
       {
-        "trxId": "5d634c6b38d21ed1fc8ed16c203c51f3b6b700fb68d6f4e576075ca90d5be645",
+        "trxId": "582d1689db6313bb04550ad359c2039290714256a97b5ac15e6d764f0d870f74",
         "actionOrdinal": 2,
+        "contract": "waxbettokens",
+        "action": "transfer",
+        "symcode": "ETH",
+        "from": "earnbetaccts",
+        "to": "waxbetdice11",
+        "quantity": "0.00090000 ETH",
+        "memo": "o50--,154",
+        "amount": "90000",
+        "precision": 8,
+        "value": 0.0009
+      }, {
+        "trxId": "ab515ecb7e0f2f36e70a6cb927935b0a511f507bd5eb941a75bd93f8facbf78e",
+        "actionOrdinal": 1,
         "contract": "alien.worlds",
         "action": "transfer",
         "symcode": "TLM",
-        "from": "m.federation",
-        "to": "3tqm2.c.wam",
-        "quantity": "0.9047 TLM",
-        "memo": "ALIEN WORLDS - Mined Trilium",
-        "amount": "9047",
+        "from": "alienhelpers",
+        "to": "wuitk.wam",
+        "quantity": "0.0101 TLM",
+        "memo": "AlienHelpers 👾",
+        "amount": "101",
         "precision": 4,
-        "value": 0.9047
+        "value": 0.0101
       }
     ]
   }
