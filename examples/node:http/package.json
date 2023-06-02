@@ -1,10 +1,10 @@
 {
   "type": "module",
   "scripts": {
-    "start": "bun http.ts"
+    "start": "tsx http.ts"
   },
   "dependencies": {
     "@wharfkit/session": "^0.5.0",
-    "express": "latest"
+    "@types/node": "latest"
   }
 }
