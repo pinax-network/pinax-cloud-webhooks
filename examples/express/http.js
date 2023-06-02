@@ -1,7 +1,7 @@
 import { Bytes, PublicKey, Signature } from "@wharfkit/session";
 import express from 'express';
 
-const port = process.argv[2] ?? 3000
+const port = 3000;
 const app = express()
 
 app.use(express.text({ type: 'application/json'}));
@@ -30,5 +30,5 @@ app.use(async (req, res) => {
 })
 
 app.listen(port, () => {
-  console.dir(`Listening on port ${port}`);
+  console.log(`Listening on port http://localhost:${port}`);
 })

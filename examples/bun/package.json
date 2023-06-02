@@ -1,8 +1,9 @@
 {
   "scripts": {
-    "start": "bun http.js"
+    "start": "bun http.ts"
   },
   "dependencies": {
-    "@wharfkit/session": "^0.5.0"
+    "@wharfkit/session": "^0.5.0",
+    "@types/node": "latest"
   }
 }

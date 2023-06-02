@@ -1,12 +1,9 @@
 import { Bytes, PublicKey, Signature } from "@wharfkit/session";
 
-const port = process.argv[2] ?? 3000
-console.dir(`Listening on port ${port}`);
-
 export default {
-  port,
+  port: 3000,
   development: true,
-  async fetch(request) {
+  async fetch(request: Request) {
     // get headers and body from POST request
     const timestamp = request.headers.get("x-signature-timestamp");
     const signature = request.headers.get("x-signature-secp256k1");
@@ -18,8 +15,9 @@ export default {
 
     // validate signature using public key
     const publicKey = PublicKey.from("PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B");
-    const hex = Bytes.from(Buffer.from(timestamp + body).toString("hex"));
-    const isVerified = Signature.from(signature).verifyMessage(hex, publicKey);
+    const binary = Buffer.from(timestamp + body);
+    const message = Bytes.from(binary.toString("hex"));
+    const isVerified = Signature.from(signature).verifyMessage(message, publicKey);
 
     if (!isVerified) {
       return new Response("invalid request signature", { status: 401 });

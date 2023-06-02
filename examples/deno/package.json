@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "deno run --allow-net http.ts"
+  },
+  "dependencies": {
+    "@wharfkit/session": "^0.5.0"
+  }
+}
