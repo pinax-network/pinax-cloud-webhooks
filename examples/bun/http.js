@@ -1,7 +1,7 @@
 import { Bytes, PublicKey, Signature } from "@wharfkit/session";
 
 const port = process.argv[2] ?? 3000
-console.log(`Listening on port ${port}`);
+console.dir(`Listening on port ${port}`);
 
 export default {
   port,
