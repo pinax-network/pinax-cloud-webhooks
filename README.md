@@ -8,7 +8,7 @@ Add **webhooks** to your [**Pinax Cloud**](https://pinax.network/) project.
 - [`Deno`](/examples/deno) - https://deno.com/runtime
 - [`Express`](/examples/express) - https://expressjs.com/
 - [`node:http`](/examples/node:http) - https://nodejs.org/api/http.html
-- [POST request](/post.http)
+- [POST request](/examples/post.http)
 
 ## Getting Started
 
