@@ -7,8 +7,8 @@ ENV PORT $PORT
 
 COPY package*.json ./
 
-COPY . .
-
 RUN npm ci
+
+COPY . .
 
 CMD [ "node", "http.js" ]
