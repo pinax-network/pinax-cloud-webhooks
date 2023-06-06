@@ -11,7 +11,6 @@ const handler = async (request: Request) => {
   const timestamp = request.headers.get("x-signature-timestamp");
   const signature = request.headers.get("x-signature-secp256k1");
   const body = await request.text();
-  // console.log(body);
 
   if (!timestamp) return new Response("missing required timestamp in headers", { status: 400 });
   if (!signature) return new Response("missing required signature in headers", { status: 400 });
