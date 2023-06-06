@@ -1,10 +1,10 @@
-import { Bytes, PublicKey, Signature } from "@wharfkit/session";
+import { Bytes, PublicKey, Signature } from "npm:@wharfkit/session";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { encode } from "https://deno.land/std@0.190.0/encoding/hex.ts";
 import "https://deno.land/std@0.190.0/dotenv/load.ts";
 
-const PORT = Deno.env.get("PORT") ?? 3000;
-const PUBLIC_KEY = Deno.env.get("PUBLIC_KEY") ?? "PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B";
+const PORT = Deno.env.get("PORT");
+const PUBLIC_KEY = Deno.env.get("PUBLIC_KEY");
 
 const handler = async (request: Request) => {
   // get headers and body from POST request
