@@ -110,6 +110,18 @@ x-signature-timestamp: 1685740240
 }
 ```
 
+## Signing Request libraries
+
+### Typescript
+- [Greymass - `eosio-signing-request`](https://github.com/greymass/eosio-signing-request)
+
+## C#
+- [Scatter - `eos-sharp`](https://github.com/GetScatter/eos-sharp)
+- [Liquiid - `EosioSigningRequestSharp`](https://github.com/liquiidio/EosioSigningRequestSharp)
+
+### Go
+- [EOS Canada & EOS Nation - `eos-go`](https://github.com/EOS-Nation/eos-go)
+
 ## Validate R1 signature
 
 ```typescript
@@ -131,3 +143,5 @@ if (!isVerified) {
   return new Response("invalid request signature", { status: 401 });
 }
 ```
+
+## Docker
