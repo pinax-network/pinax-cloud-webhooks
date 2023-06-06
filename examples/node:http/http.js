@@ -6,9 +6,9 @@ const PORT = process.env.PORT ?? 3000;
 const PUBLIC_KEY = process.env.PUBLIC_KEY ?? "PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B";
 const server = http.createServer();
 
-function rawBody(request: http.IncomingMessage) {
+function rawBody(request) {
   return new Promise<string>((resolve, reject) => {
-      let chunks: Uint8Array[] = [];
+      let chunks = [];
       request.on('data', (chunk) => {
           chunks.push(chunk);
       }).on('end', () => {

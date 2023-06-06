@@ -7,7 +7,6 @@ ENV PORT $PORT
 
 COPY . .
 
-RUN npm install --save-dev tsx
+RUN npm ci
 
-CMD [ "npx", "tsx", "http.ts" ]
-
+CMD [ "node", "http.js" ]
