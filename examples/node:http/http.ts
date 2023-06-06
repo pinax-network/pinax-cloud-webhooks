@@ -1,7 +1,9 @@
 import { Bytes, PublicKey, Signature } from "@wharfkit/session";
 import * as http from "node:http";
+import "dotenv/config";
 
-const port = 3000;
+const PORT = process.env.PORT ?? 3000;
+const PUBLIC_KEY = process.env.PUBLIC_KEY ?? "PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B";
 const server = http.createServer();
 
 function rawBody(request: http.IncomingMessage) {
@@ -29,7 +31,7 @@ server.on("request", async (req, res) => {
   if (!body) return res.writeHead(400).end("missing body");
 
   // validate signature using public key
-  const publicKey = PublicKey.from("PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B");
+  const publicKey = PublicKey.from(PUBLIC_KEY);
   const binary = Buffer.from(timestamp + body);
   const message = Bytes.from(binary.toString("hex"));
   const isVerified = Signature.from(signature).verifyMessage(message, publicKey);
@@ -41,6 +43,6 @@ server.on("request", async (req, res) => {
   return res.end("OK");
 });
 
-server.listen(port, () => {
-  console.log(`Listening on port http://localhost:${port}`);
+server.listen(PORT, () => {
+  console.log(`Listening on port http://localhost:${PORT}`);
 });

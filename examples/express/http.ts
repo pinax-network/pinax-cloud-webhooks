@@ -1,7 +1,9 @@
 import { Bytes, PublicKey, Signature } from "@wharfkit/session";
 import express from 'express';
+import "dotenv/config";
 
-const port = 3000;
+const PORT = process.env.PORT ?? 3000;
+const PUBLIC_KEY = process.env.PUBLIC_KEY ?? "PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B";
 const app = express()
 
 app.use(express.text({ type: 'application/json'}));
@@ -17,7 +19,7 @@ app.use(async (req, res) => {
   if (!body) return res.send("missing body").status(400);
 
   // validate signature using public key
-  const publicKey = PublicKey.from("PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B");
+  const publicKey = PublicKey.from(PUBLIC_KEY);
   const message = Bytes.from(Buffer.from(timestamp + body).toString("hex"));
   const isVerified = Signature.from(signature).verifyMessage(message, publicKey);
 
@@ -28,6 +30,6 @@ app.use(async (req, res) => {
   return res.send('OK').status(200);
 })
 
-app.listen(port, () => {
-  console.log(`Listening on port http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Listening on port http://localhost:${PORT}`);
 })
