@@ -1,4 +1,4 @@
-FROM bitnami/express
+FROM node:20-alpine
 
 WORKDIR /app
 
