@@ -1,10 +1,14 @@
 {
   "type": "module",
   "scripts": {
-    "start": "node http.js"
+    "start": "tsx http.ts"
   },
   "dependencies": {
     "@wharfkit/session": "^0.5.0",
     "dotenv": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "tsx": "latest"
   }
 }

@@ -6,9 +6,9 @@ const PORT = process.env.PORT ?? 3000;
 const PUBLIC_KEY = process.env.PUBLIC_KEY ?? "PUB_K1_6Rqd3nkeTzZjXyrM4Nq9HFcagd73vLCEGg6iYGigdTPV7ymQKT";
 const server = http.createServer();
 
-function rawBody(request) {
+function rawBody(request: http.IncomingMessage) {
   return new Promise<string>((resolve, reject) => {
-      let chunks = [];
+      let chunks: Uint8Array[] = [];
       request.on('data', (chunk) => {
           chunks.push(chunk);
       }).on('end', () => {
@@ -32,17 +32,19 @@ server.on("request", async (req, res) => {
 
   // validate signature using public key
   const publicKey = PublicKey.from(PUBLIC_KEY);
-  const binary = Buffer.from(timestamp + body);
-  const message = Bytes.from(binary.toString("hex"));
+  const hex = Buffer.from(timestamp + body).toString("hex");
+  const message = Bytes.from(hex);
   const isVerified = Signature.from(signature).verifyMessage(message, publicKey);
 
+  console.dir({timestamp, hex, signature, isVerified});
+  console.dir(body);
   if (!isVerified) {
     return res.writeHead(401).end("invalid request signature");
   }
-  console.dir({timestamp, signature, body: JSON.parse(body)});
   return res.end("OK");
 });
 
 server.listen(PORT, () => {
   console.log(`Listening on port http://localhost:${PORT}`);
+  console.log(`Signature validation using ${PUBLIC_KEY}`);
 });

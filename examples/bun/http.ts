@@ -2,9 +2,10 @@ import { Bytes, PublicKey, Signature } from "@wharfkit/session";
 import "dotenv/config";
 
 const PORT = process.env.PORT ?? 3000;
-const PUBLIC_KEY = process.env.PUBLIC_KEY ?? "PUB_K1_6Rqd3nkeTzZjXyrM4Nq9HFcagd73vLCEGg6iYGigdTPV7ymQKT";
+const PUBLIC_KEY = process.env.PUBLIC_KEY ?? "EOS6Rqd3nkeTzZjXyrM4Nq9HFcagd73vLCEGg6iYGigdTPV8eSRmp";
 
 console.dir(`Listening on port http://localhost:${PORT}`)
+console.log(`Signature validation using ${PUBLIC_KEY}`);
 
 export default {
   port: PORT,
@@ -22,13 +23,15 @@ export default {
     // validate signature using public key
     const publicKey = PublicKey.from(PUBLIC_KEY);
     const binary = Buffer.from(timestamp + body);
-    const message = Bytes.from(binary.toString("hex"));
+    const hex = binary.toString("hex");
+    const message = Bytes.from(hex);
     const isVerified = Signature.from(signature).verifyMessage(message, publicKey);
 
+    console.dir({timestamp, hex, signature, isVerified});
+    console.dir(body);
     if (!isVerified) {
       return new Response("invalid request signature", { status: 401 });
     }
-    console.dir({timestamp, signature, body: JSON.parse(body)});
     return new Response("OK");
   },
 };

@@ -19,14 +19,17 @@ const handler = async (request: Request) => {
   // validate signature using public key
   const publicKey = PublicKey.from(PUBLIC_KEY);
   const binary = new TextEncoder().encode(timestamp + body);
-  const message = Bytes.from(new TextDecoder().decode(encode(binary)));
+  const hex = new TextDecoder().decode(encode(binary));
+  const message = Bytes.from(hex);
   const isVerified = Signature.from(signature).verifyMessage(message, publicKey);
 
+  console.dir({timestamp, hex, signature, isVerified});
+  console.dir(body);
   if (!isVerified) {
     return new Response("invalid request signature", { status: 401 });
   }
-  console.dir({timestamp, signature, body: JSON.parse(body)});
   return new Response("OK");
 };
 
-await serve(handler, { port: PORT });
+serve(handler, { port: PORT });
+console.log(`Signature validation using ${PUBLIC_KEY}`);

@@ -20,16 +20,19 @@ app.use(async (req, res) => {
 
   // validate signature using public key
   const publicKey = PublicKey.from(PUBLIC_KEY);
-  const message = Bytes.from(Buffer.from(timestamp + body).toString("hex"));
+  const hex = Buffer.from(timestamp + body).toString("hex");
+  const message = Bytes.from(hex);
   const isVerified = Signature.from(signature).verifyMessage(message, publicKey);
 
+  console.dir({timestamp, hex, signature, isVerified});
+  console.dir(body);
   if (!isVerified) {
       return res.send("invalid request signature").status(401);
   }
-  console.dir({timestamp, signature, body: JSON.parse(body)});
   return res.send('OK').status(200);
 })
 
 app.listen(PORT, () => {
   console.log(`Listening on port http://localhost:${PORT}`);
+  console.log(`Signature validation using ${PUBLIC_KEY}`);
 })
