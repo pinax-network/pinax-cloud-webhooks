@@ -3,7 +3,7 @@ import express from 'express';
 import "dotenv/config";
 
 const PORT = process.env.PORT ?? 3000;
-const PUBLIC_KEY = process.env.PUBLIC_KEY ?? "PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B";
+const PUBLIC_KEY = process.env.PUBLIC_KEY ?? "PUB_K1_6Rqd3nkeTzZjXyrM4Nq9HFcagd73vLCEGg6iYGigdTPV7ymQKT";
 const app = express()
 
 app.use(express.text({ type: 'application/json'}));

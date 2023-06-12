@@ -135,7 +135,7 @@ const timestamp = request.headers.get("x-signature-timestamp");
 const signature = request.headers.get("x-signature-secp256k1");
 
 // validate signature using public key
-const publicKey = PublicKey.from("PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B");
+const publicKey = PublicKey.from("PUB_K1_6Rqd3nkeTzZjXyrM4Nq9HFcagd73vLCEGg6iYGigdTPV7ymQKT");
 const message = Bytes.from(Buffer.from(timestamp + rawBody).toString("hex"));
 const isVerified = Signature.from(signature).verifyMessage(message, publicKey);
 

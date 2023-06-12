@@ -9,7 +9,7 @@ services:
       - 3000:3000
     network_mode: host
     environment:
-      - PUBLIC_KEY=${PUBLIC_KEY:-PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B}
+      - PUBLIC_KEY=${PUBLIC_KEY:-PUB_K1_6Rqd3nkeTzZjXyrM4Nq9HFcagd73vLCEGg6iYGigdTPV7ymQKT}
       - PORT=${PORT:-3000}
   deno:
     build:
@@ -19,7 +19,7 @@ services:
       - 3000:3000
     network_mode: host
     environment:
-      - PUBLIC_KEY=${PUBLIC_KEY:-PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B}
+      - PUBLIC_KEY=${PUBLIC_KEY:-PUB_K1_6Rqd3nkeTzZjXyrM4Nq9HFcagd73vLCEGg6iYGigdTPV7ymQKT}
       - PORT=${PORT:-3000}
   express:
     build:
@@ -29,7 +29,7 @@ services:
       - 3000:3000
     network_mode: host
     environment:
-      - PUBLIC_KEY=${PUBLIC_KEY:-PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B}
+      - PUBLIC_KEY=${PUBLIC_KEY:-PUB_K1_6Rqd3nkeTzZjXyrM4Nq9HFcagd73vLCEGg6iYGigdTPV7ymQKT}
       - PORT=${PORT:-3000}
   node:
     build:
@@ -39,5 +39,5 @@ services:
       - 3000:3000
     network_mode: host
     environment:
-      - PUBLIC_KEY=${PUBLIC_KEY:-PUB_K1_5F38WK8BDCfiu3EWhb5wwrsrrat86GhVEyXp33NbDTB8DgtG4B}
+      - PUBLIC_KEY=${PUBLIC_KEY:-PUB_K1_6Rqd3nkeTzZjXyrM4Nq9HFcagd73vLCEGg6iYGigdTPV7ymQKT}
       - PORT=${PORT:-3000}
