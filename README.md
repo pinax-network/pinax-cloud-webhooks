@@ -122,7 +122,7 @@ x-signature-timestamp: 1686802918
 ### Go
 - [EOS Canada & EOS Nation - `eos-go`](https://github.com/EOS-Nation/eos-go)
 
-## Validate R1 signature
+## Validate Ed25519 signature
 
 ```typescript
 import nacl from "tweetnacl";
