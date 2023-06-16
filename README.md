@@ -56,54 +56,54 @@ The POST message will be a JSON object with the following structure:
 ```http
 POST http://localhost:3000 HTTP/1.1
 content-type: application/json
-x-signature-secp256k1: SIG_K1_Ke6QVix3nkobMBmeWkBFq9Dhee1wQEvaCwtDzqmrZ2u4cRjjA7R3kxioxZJVExL2J14RYxpzeFP4mkohUwQsBSmAPKz5mG
-x-signature-timestamp: 1685740240
+x-signature-ed25519: 8bfa890aef1bccc753c9cad540844fb1082c610d505a23ecdfabd0bed05cfa429471f0b20f49c3e6125677ab1eedc625fb4f7bfcc8eeff125312a176ba41460b
+x-signature-timestamp: 1686802918
 ```
 
 **body**
 
 ```json
 {
-  "id": "DgHKHEVqKVEYDbPe9YLXY",
-  "cursor": "zabwrIYYom395LNlwBky4aWwLpcyBF5nUA_lKxJDj4ujpHLDj8iiVGJ0bE7Uwvz1iBLoQgyrj4vIEC9z9JRWvoO_kek26CQ_QC4lwYHvrrTvKfb1aFsTJO5qW77bM9DRWTjfZwnyfbgJ6tWybvPfNks1Z5QiKmO7jG1ZooMCePBDv3sxwWmvcMnV1fvE8NRI_-IiEbKpnX-rBWZ-KE9cNJnQZ_PKvTx2ZHY=",
+  "cursor": "gBCLb0z81lU8vbvZVzJkEaWwLpc_DFhqVQ3jLxVJgYH2pSTFicymUzd9bx2GlKH51RboGgmo19eZRX588ZED7YW8y7FhuSM6EHh4wNzo87Dne6KjPQlIIOhjC-iJMNncUT7SYgz9f7UI5N_nb6XZMxMyMZEuK2blizdZqoZXIfAVsHthkjz6cJ6Bga_A-YtEq-AnEuf1xn6lDzF1Lx4LOc_RNqGe6z4nN3Rq",
   "clock": {
-    "timestamp": "2023-06-02T21:10:40.000Z",
-    "number": 248540132,
-    "id": "0ed06be4d314c4be5e739f7ad54a86d62bebab5576e9b81e00a57aa8ee84dea8"
+    "timestamp": "2023-06-15T04:21:58.000Z",
+    "number": 250665484,
+    "id": "0ef0da0cf870f489833ac498da073acadf895d22f3dce68483aa43cac1d27b17"
   },
   "manifest": {
     "chain": "wax",
     "moduleName": "map_transfers",
-    "moduleHash": "14af0133e41609c04405da93daeab01806068241"
+    "moduleHash": "6aa24e6aa34db4a4faf55c69c6f612aeb06053c2"
   },
   "data": {
     "items": [
       {
-        "trxId": "582d1689db6313bb04550ad359c2039290714256a97b5ac15e6d764f0d870f74",
+        "trxId": "dd93c64db8ff91cfac74e731fd518548aa831be3d833e6a1fefeac69d2ddd138",
         "actionOrdinal": 2,
-        "contract": "waxbettokens",
+        "contract": "eosio.token",
         "action": "transfer",
-        "symcode": "ETH",
-        "from": "earnbetaccts",
-        "to": "waxbetdice11",
-        "quantity": "0.00090000 ETH",
-        "memo": "o50--,154",
-        "amount": "90000",
+        "symcode": "WAX",
+        "from": "banxawallet1",
+        "to": "atomicmarket",
+        "quantity": "1340.00000000 WAX",
+        "memo": "deposit",
         "precision": 8,
-        "value": 0.0009
-      }, {
-        "trxId": "ab515ecb7e0f2f36e70a6cb927935b0a511f507bd5eb941a75bd93f8facbf78e",
-        "actionOrdinal": 1,
-        "contract": "alien.worlds",
+        "amount": "134000000000",
+        "value": 1340
+      },
+      {
+        "trxId": "dd93c64db8ff91cfac74e731fd518548aa831be3d833e6a1fefeac69d2ddd138",
+        "actionOrdinal": 7,
+        "contract": "eosio.token",
         "action": "transfer",
-        "symcode": "TLM",
-        "from": "alienhelpers",
-        "to": "wuitk.wam",
-        "quantity": "0.0101 TLM",
-        "memo": "AlienHelpers 👾",
-        "amount": "101",
-        "precision": 4,
-        "value": 0.0101
+        "symcode": "WAX",
+        "from": "atomicmarket",
+        "to": "jft4m.c.wam",
+        "quantity": "1206.00000000 WAX",
+        "memo": "AtomicMarket Sale Payout - ID #129675349",
+        "precision": 8,
+        "amount": "120600000000",
+        "value": 1206
       }
     ]
   }
@@ -125,19 +125,21 @@ x-signature-timestamp: 1685740240
 ## Validate R1 signature
 
 ```typescript
-import { Bytes, PublicKey, Signature } from "@wharfkit/session";
+import nacl from "tweetnacl";
 
 // ...HTTP server
 
 // get headers and body from POST request
 const rawBody = await request.text();
 const timestamp = request.headers.get("x-signature-timestamp");
-const signature = request.headers.get("x-signature-secp256k1");
+const signature = request.headers.get("x-signature-ed25519");
 
 // validate signature using public key
-const publicKey = PublicKey.from("PUB_K1_6Rqd3nkeTzZjXyrM4Nq9HFcagd73vLCEGg6iYGigdTPV7ymQKT");
-const message = Bytes.from(Buffer.from(timestamp + rawBody).toString("hex"));
-const isVerified = Signature.from(signature).verifyMessage(message, publicKey);
+const isVerified = nacl.sign.detached.verify(
+  Buffer.from(timestamp + body),
+  Buffer.from(signature, 'hex'),
+  Buffer.from(PUBLIC_KEY, 'hex')
+);
 
 if (!isVerified) {
   return new Response("invalid request signature", { status: 401 });

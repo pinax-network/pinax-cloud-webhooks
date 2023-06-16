@@ -1,9 +1,9 @@
-import { Bytes, PublicKey, Signature } from "@wharfkit/session";
+import nacl from "tweetnacl";
 import * as http from "node:http";
 import "dotenv/config";
 
 const PORT = process.env.PORT ?? 3000;
-const PUBLIC_KEY = process.env.PUBLIC_KEY ?? "PUB_K1_6Rqd3nkeTzZjXyrM4Nq9HFcagd73vLCEGg6iYGigdTPV7ymQKT";
+const PUBLIC_KEY = process.env.PUBLIC_KEY ?? "a3cb7366ee8ca77225b4d41772e270e4e831d171d1de71d91707c42e7ba82cc9";
 const server = http.createServer();
 
 function rawBody(request: http.IncomingMessage) {
@@ -23,7 +23,7 @@ server.on("request", async (req, res) => {
 
   // get headers and body from POST request
   const timestamp = String(req.headers["x-signature-timestamp"]);
-  const signature = String(req.headers["x-signature-secp256k1"]);
+  const signature = String(req.headers["x-signature-ed25519"]);
   const body = await rawBody(req);
 
   if (!timestamp) return res.writeHead(400).end("missing required timestamp in headers");
@@ -31,12 +31,13 @@ server.on("request", async (req, res) => {
   if (!body) return res.writeHead(400).end("missing body");
 
   // validate signature using public key
-  const publicKey = PublicKey.from(PUBLIC_KEY);
-  const hex = Buffer.from(timestamp + body).toString("hex");
-  const message = Bytes.from(hex);
-  const isVerified = Signature.from(signature).verifyMessage(message, publicKey);
+  const isVerified = nacl.sign.detached.verify(
+    Buffer.from(timestamp + body),
+    Buffer.from(signature, 'hex'),
+    Buffer.from(PUBLIC_KEY, 'hex')
+  );
 
-  console.dir({timestamp, hex, signature, isVerified});
+  console.dir({timestamp, signature, isVerified});
   console.dir(body);
   if (!isVerified) {
     return res.writeHead(401).end("invalid request signature");
